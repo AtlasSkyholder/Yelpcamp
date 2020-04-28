@@ -16,7 +16,7 @@ app.get("/campgrounds", function(req, res){
     {name: "Mountain Goat's Rest", image: "https://pixabay.com/get/57e8d0424a5bae14f1dc84609620367d1c3ed9e04e507441722673d19f4ec1_340.jpg"}
   ];
 
-  res.render("campgrounds");
+  res.render("campgrounds",{campgrounds:campgrounds});
 });
 
 app.listen(PORT, process.env.IP, function(){
