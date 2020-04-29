@@ -1,9 +1,12 @@
+require('dotenv').config();
+
 const PORT = process.env.PORT || 8600;
 
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const connectDB = require("./db/connection");
+const Camps = require("./db/schema");
 
 connectDB();
 app.use(bodyParser.urlencoded({extended: true}));
@@ -36,6 +39,18 @@ app.post("/campgrounds", function(req, res){
   const image = req.body.image;
   let newCampground = {name: name, image: image};
   campgrounds.push(newCampground);
+
+  //.save to database
+  const newCamp = new Camps(newCampground);
+
+  newCamp.save((error) => {
+    if (error) {
+      console.log('Ooops, something went wrong.');
+    } else {
+      console.log('Data has been save!!');
+    }
+  });
+
 
   res.redirect("campgrounds");
   // get data from form and add to campgrounds array
