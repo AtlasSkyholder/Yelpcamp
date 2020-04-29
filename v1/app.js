@@ -3,7 +3,9 @@ const PORT = process.env.PORT || 8600;
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const connectDB = require("./db/connection");
 
+connectDB();
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
