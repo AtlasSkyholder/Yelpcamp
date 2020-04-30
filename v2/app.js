@@ -52,6 +52,7 @@ app.get("/", function(req,res){
   res.render("landing");
 });
 
+//INDEX - show all campgrounds
 app.get("/campgrounds", function(req, res){
   // Get all camopgrounds from DB
   Camps.find({}, function(err, camps){
@@ -63,6 +64,7 @@ app.get("/campgrounds", function(req, res){
   });
 });
 
+//CREATE - add new campgrounds to database
 app.post("/campgrounds", function(req, res){
   const name = req.body.name;
   const image = req.body.image;
@@ -84,9 +86,14 @@ app.post("/campgrounds", function(req, res){
   // redirect back to campgrounds page
 });
 
+//NEW - show form to create new campground
 app.get("/campgrounds/new", function(req, res){
   res.render("new.ejs");
 });
+
+app.get("/campgrounds/:id", function(req, res){
+  res.send("THIS WILL BE THE SHOW PAGE ONE DAY!");
+})
 
 app.listen(PORT, process.env.IP, function(){
   console.log("The YelpCamp Server Has Started!");
