@@ -68,7 +68,8 @@ app.get("/campgrounds", function(req, res){
 app.post("/campgrounds", function(req, res){
   const name = req.body.name;
   const image = req.body.image;
-  let newCampground = {name: name, image: image};
+  const description = req.body.description;
+  let newCampground = {name: name, image: image, description: description};
 
   //.save to database
   const newCamp = new Camps(newCampground);
@@ -92,6 +93,8 @@ app.get("/campgrounds/new", function(req, res){
 });
 
 app.get("/campgrounds/:id", function(req, res){
+  //find the campground with provided ID
+  //render show template with that campground
   res.send("THIS WILL BE THE SHOW PAGE ONE DAY!");
 })
 

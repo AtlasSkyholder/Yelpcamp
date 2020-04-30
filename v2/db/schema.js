@@ -5,7 +5,8 @@ const Schema = mongoose.Schema;
 // Schema
 const CampsSchema = new Schema({
   name: String,
-  image: String
+  image: String,
+  description: String
 });
 
 // Model
