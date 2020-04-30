@@ -6,11 +6,22 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const connectDB = require("./db/connection");
+const mongoose = require("mongoose");
+
 const Camps = require("./db/schema");
 
 connectDB();
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
+
+// SCHEMA SETUP
+const campgroundSchema = mongoose.Schema({
+  name:String,
+  image:String
+});
+
+const Campground = mongoose.model("Campground", campgroundSchema);
+
 
 const campgrounds = [
   {name: "Salmon Creek", image: "https://cdn.pixabay.com/photo/2016/01/19/16/48/teepee-1149402_960_720.jpg"},
