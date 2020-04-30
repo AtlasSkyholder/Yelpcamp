@@ -58,7 +58,6 @@ app.get("/campgrounds", function(req, res){
     if(err){
       console.log(err);
     } else {
-      console.log(camps);
       res.render("campgrounds",{campgrounds:camps});
     }
   });
@@ -71,17 +70,16 @@ app.post("/campgrounds", function(req, res){
 
   //.save to database
   const newCamp = new Camps(newCampground);
-
+  
+  // created and saved c campground to the database
   newCamp.save((error) => {
     if (error) {
       console.log('Ooops, something went wrong.');
     } else {
       console.log('Data has been saved!!');
+      res.redirect("campgrounds");
     }
   });
-
-
-  res.redirect("campgrounds");
   // get data from form and add to campgrounds array
   // redirect back to campgrounds page
 });
