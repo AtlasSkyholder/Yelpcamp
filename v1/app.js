@@ -14,13 +14,26 @@ connectDB();
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
-// SCHEMA SETUP
+/* // SCHEMA SETUP
 const campgroundSchema = mongoose.Schema({
   name:String,
   image:String
 });
 
 const Campground = mongoose.model("Campground", campgroundSchema);
+
+Campground.create(
+  {
+    name: "Salmon Creek",
+    image: "https://cdn.pixabay.com/photo/2016/01/19/16/48/teepee-1149402_960_720.jpg"
+  }, function(err, campground){
+    if(err){
+      console.log(err);
+    } else {
+      console.log("NEWLY CREATED CAMPGROUND: ");
+      console.log(campground);
+    }
+  }); */
 
 
 const campgrounds = [
@@ -40,6 +53,7 @@ app.get("/", function(req,res){
 });
 
 app.get("/campgrounds", function(req, res){
+  
 
 
   res.render("campgrounds",{campgrounds:campgrounds});
@@ -58,7 +72,7 @@ app.post("/campgrounds", function(req, res){
     if (error) {
       console.log('Ooops, something went wrong.');
     } else {
-      console.log('Data has been save!!');
+      console.log('Data has been saved!!');
     }
   });
 
