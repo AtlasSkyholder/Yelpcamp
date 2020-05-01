@@ -9,8 +9,9 @@ const connectDB = require("./db/connection");
 const mongoose = require("mongoose");
 
 const Camps = require("./models/campground");
+const seedDB = require("./seeds");
 
-
+seedDB();
 connectDB();
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
