@@ -59,3 +59,10 @@ DESTROY  /dogs/:id      DELETE Delete a particular dog, then redirect somewhere
   * Use module.exports
   * Require everything correctly!
 
+#Add Sedds File
+  * Add a seeds.js file
+  * Run the seeds file every time the server starts
+
+#Add the Comment model!
+  * Make our errors go away!
+  * Display comments on campground show page
