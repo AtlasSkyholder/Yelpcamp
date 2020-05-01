@@ -59,7 +59,7 @@ app.get("/campgrounds", function(req, res){
     if(err){
       console.log(err);
     } else {
-      res.render("campgrounds",{campgrounds:camps});
+      res.render("index",{campgrounds:camps});
     }
   });
 });
@@ -89,13 +89,20 @@ app.post("/campgrounds", function(req, res){
 
 //NEW - show form to create new campground
 app.get("/campgrounds/new", function(req, res){
-  res.render("new.ejs");
+  res.render("new");
 });
 
 app.get("/campgrounds/:id", function(req, res){
   //find the campground with provided ID
-  //render show template with that campground
-  res.send("THIS WILL BE THE SHOW PAGE ONE DAY!");
+  Camps.findById(req.params.id, function(err, foundCampground){
+    if(err){
+      console.log(err);
+    } else {
+      //render show template with that campground
+
+      res.render("show", {campground: foundCampground});
+    }
+  });
 })
 
 app.listen(PORT, process.env.IP, function(){
