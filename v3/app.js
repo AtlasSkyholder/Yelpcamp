@@ -11,36 +11,11 @@ const mongoose = require("mongoose");
 const Camps = require("./models/campground");
 const seedDB = require("./seeds");
 
-seedDB();
 connectDB();
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
+seedDB();
 
-/*Campground.create(
-  {
-    name: "Salmon Creek",
-    image: "https://cdn.pixabay.com/photo/2016/01/19/16/48/teepee-1149402_960_720.jpg"
-  }, function(err, campground){
-    if(err){
-      console.log(err);
-    } else {
-      console.log("NEWLY CREATED CAMPGROUND: ");
-      console.log(campground);
-    }
-  }); */
-
-
-/* const campgrounds = [
-  {name: "Salmon Creek", image: "https://cdn.pixabay.com/photo/2016/01/19/16/48/teepee-1149402_960_720.jpg"},
-  {name: "Granite Hill", image: "https://cdn.pixabay.com/photo/2016/02/09/16/35/night-1189929_960_720.jpg"},
-  {name: "Mountain Goat's Rest", image: "https://cdn.pixabay.com/photo/2019/10/03/11/14/camp-4522970_960_720.jpg"},
-  {name: "Salmon Creek", image: "https://cdn.pixabay.com/photo/2016/01/19/16/48/teepee-1149402_960_720.jpg"},
-  {name: "Granite Hill", image: "https://cdn.pixabay.com/photo/2016/02/09/16/35/night-1189929_960_720.jpg"},
-  {name: "Mountain Goat's Rest", image: "https://cdn.pixabay.com/photo/2019/10/03/11/14/camp-4522970_960_720.jpg"},
-  {name: "Salmon Creek", image: "https://cdn.pixabay.com/photo/2016/01/19/16/48/teepee-1149402_960_720.jpg"},
-  {name: "Granite Hill", image: "https://cdn.pixabay.com/photo/2016/02/09/16/35/night-1189929_960_720.jpg"},
-  {name: "Mountain Goat's Rest", image: "https://cdn.pixabay.com/photo/2019/10/03/11/14/camp-4522970_960_720.jpg"}
-]; */
 
 app.get("/", function(req,res){
   res.render("landing");
@@ -86,12 +61,14 @@ app.get("/campgrounds/new", function(req, res){
   res.render("new");
 });
 
+//SHOW - shows more info about one campground
 app.get("/campgrounds/:id", function(req, res){
   //find the campground with provided ID
-  Camps.findById(req.params.id, function(err, foundCampground){
+  Camps.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
     if(err){
       console.log(err);
     } else {
+      console.log(foundCampground);
       //render show template with that campground
 
       res.render("show", {campground: foundCampground});
