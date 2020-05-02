@@ -7,9 +7,13 @@ const app = express();
 const bodyParser = require("body-parser");
 const connectDB = require("./db/connection");
 const mongoose = require("mongoose");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
 
 const Camps = require("./models/campground");
 const Comment = require("./models/comment");
+const User = require("./models/user");
+
 const seedDB = require("./seeds");
 
 connectDB();
