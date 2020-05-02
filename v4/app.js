@@ -9,6 +9,7 @@ const connectDB = require("./db/connection");
 const mongoose = require("mongoose");
 
 const Camps = require("./models/campground");
+const Comment = require("./models/comment");
 const seedDB = require("./seeds");
 
 connectDB();
@@ -68,7 +69,6 @@ app.get("/campgrounds/:id", function(req, res){
     if(err){
       console.log(err);
     } else {
-      console.log(foundCampground);
       //render show template with that campground
 
       res.render("campgrounds/show", {campground: foundCampground});
@@ -94,6 +94,22 @@ app.get("/campgrounds/:id/comments/new", function(req, res){
 
 app.post("/campgrounds/:id/comments", function(req, res){
   //lookup campground using ID
+  Camps.findById(req.params.id, function(err, campground){
+    if(err){
+      console.log(err);
+      res.redirect("/campgrounds");
+    } else {
+      Comment.create(req.body.comment, function(err, comment){
+        if(err){
+          console.log(err);
+        } else {
+          campground.comments.push(comment);
+          campground.save();
+          res.redirect("/campgrounds/" + campground._id);
+        }
+      });
+    }
+  });
   //create new comment
   //connet new comment to campground
   //redirect campground show page
