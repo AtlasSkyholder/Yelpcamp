@@ -76,3 +76,10 @@ DESTROY  /dogs/:id      DELETE Delete a particular dog, then redirect somewhere
   * Add sidebar to show page
   * Display comments nicely
 
+##Finish Styling Show Page
+  * Add public directory
+  * Add custom stylesheet
+
+##Add User Model
+  * Install all packages needed for auth
+  * Define User model
