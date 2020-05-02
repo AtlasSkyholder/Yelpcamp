@@ -92,6 +92,13 @@ app.get("/campgrounds/:id/comments/new", function(req, res){
   });
 });
 
+app.post("/campgrounds/:id/comments", function(req, res){
+  //lookup campground using ID
+  //create new comment
+  //connet new comment to campground
+  //redirect campground show page
+})
+
 app.listen(PORT, process.env.IP, function(){
   console.log("The YelpCamp Server Has Started!");
 });
