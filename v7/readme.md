@@ -101,3 +101,6 @@ DESTROY  /dogs/:id      DELETE Delete a particular dog, then redirect somewhere
 
 ##Auth Pt. 5 - Show/Hide Links
   * Show/hide auth links in navbar correctly
+
+##Refactor The Routes
+  * Use Express router to reorganize all routes
