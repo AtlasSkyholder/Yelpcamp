@@ -119,3 +119,7 @@ DESTROY  /dogs/:id      DELETE Delete a particular dog, then redirect somewhere
   * Add Link to Edit Page
   * Add Update Route
   * Fix $set problem
+
+#Deleting Campgrounds
+  * Add Destroy Route
+  * Add Delete button
