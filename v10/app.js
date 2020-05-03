@@ -9,12 +9,13 @@ const connectDB = require("./db/connection");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
+const methodOverride = require("method-override");
 
 const Camps = require("./models/campground");
 const Comment = require("./models/comment");
 const User = require("./models/user");
 
-//const seedDB = require("./seeds");  //seed the database
+const seedDB = require("./seeds");
 
 //requiring routes
 const commentRoutes = require("./routes/comments");
@@ -25,7 +26,8 @@ connectDB();
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
-seedDB();
+app.use(methodOverride("_method"));
+//seedDB();  //seed the database
 
 //PASSPORT CONFIGURATION
 app.use(require("express-session")({
