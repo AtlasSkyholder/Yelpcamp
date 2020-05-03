@@ -35,6 +35,12 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// middleware for passing user info to header
+app.use(function(req, res, next){
+  res.locals.currentUser = req.user;
+  next();
+})
+
 app.get("/", function(req,res){
   res.render("landing");
 });
@@ -46,7 +52,7 @@ app.get("/campgrounds", function(req, res){
     if(err){
       console.log(err);
     } else {
-      res.render("campgrounds/index",{campgrounds:camps});
+      res.render("campgrounds/index",{campgrounds:camps, currentUser: req.user});
     }
   });
 });

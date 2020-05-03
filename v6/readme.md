@@ -98,3 +98,6 @@ DESTROY  /dogs/:id      DELETE Delete a particular dog, then redirect somewhere
   * Prevent user from adding a comment if not signed in
   * Add links to navbar
   * Show/hide auth links correctly
+
+##Auth Pt. 5 - Show/Hide Links
+  * Show/hide auth links in navbar correctly
