@@ -88,3 +88,7 @@ DESTROY  /dogs/:id      DELETE Delete a particular dog, then redirect somewhere
   * Configure Passport
   * Add register routes
   * Add register template
+
+##Auth Pt. 3 - Login
+  * Add login routes
+  * Add login template
