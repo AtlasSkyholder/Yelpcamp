@@ -134,12 +134,16 @@ DESTROY  /dogs/:id      DELETE Delete a particular dog, then redirect somewhere
   * Add Edit button
   * Add Update route
 
-<!-- /campgrounds/:id/edit
-/campgrounds/:id/comments/:comment_id/edit -->
+Campground Edit Route: <!-- /campgrounds/:id/edit -->
+Comment Edit Route: <!-- /campgrounds/:id/comments/:comment_id/edit -->
 
 #Deleting Comments
   * Add Destroy route
   * Add Delete button
 
+Campground Destroy Route: <!-- /campgrounds/:id -->
+Comment Destroy Route: <!-- /campgrounds/:id/comments/:comment_id -->
+
 #Authorization Part 2: Comments
   * User can only edit his/her comments
+  * User can only delete his/her comments
