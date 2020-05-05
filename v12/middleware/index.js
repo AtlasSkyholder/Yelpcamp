@@ -11,6 +11,12 @@ middlewareObj.checkCampgroundOwnership = function(req, res, next) {
         req.flash("error", "Campground not found.");
         res.redirect("back");
       } else {
+        // Added this block, to check if foundCampground exists, and if it doesn't to throw an error via connect-flash and send us back to the homepage
+        if (!foundCampground) {
+          req.flash("error", "Item not found.");
+          return res.redirect("back");
+        }
+        // If the upper condition is true this will break out of the middleware and p
         // does user own the campground?
         if(foundCampground.author.id.equals(req.user._id)) {
           next();
@@ -32,6 +38,12 @@ middlewareObj.checkCommentOwnership = function(req, res, next) {
       if(err){
         res.redirect("back");
       } else {
+        // Added this block, to check if foundComments exists, and if it doesn't to throw an error via connect-flash and send us back to the homepage
+        if (!foundComment) {
+          req.flash("error", "Item not found.");
+          return res.redirect("back");
+        }
+        // If the upper condition is true this will break out of the middleware and p
         // does user own the comment?
         if(foundComment.author.id.equals(req.user._id)) {
           next();

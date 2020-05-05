@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Camps = require("../models/campground");
+const Comment = require("../models/comment");
 const middleware = require("../middleware");
 
 //INDEX - show all campgrounds
@@ -18,13 +19,14 @@ router.get("/", function(req, res){
 //CREATE - add new campgrounds to database
 router.post("/", middleware.isLoggedIn, function(req, res){
   const name = req.body.name;
+  const price = req.body.price;
   const image = req.body.image;
   const description = req.body.description;
   const author = {
     id: req.user._id,
     username: req.user.username
   }
-  let newCampground = {name: name, image: image, description: description, author: author};
+  let newCampground = {name: name, price: price, image: image, description: description, author: author};
 
   //.save to database
   const newCamp = new Camps(newCampground);
@@ -54,8 +56,10 @@ router.get("/:id", function(req, res){
     if(err){
       console.log(err);
     } else {
+      if (!foundCampground) {
+        return res.status(400).send("Item not found.")
+      }
       //render show template with that campground
-
       res.render("campgrounds/show", {campground: foundCampground});
     }
   });
@@ -64,6 +68,9 @@ router.get("/:id", function(req, res){
 // EDIT CAMPGROUND ROUTE
 router.get("/:id/edit", middleware.checkCampgroundOwnership, function(req, res){
   Camps.findById(req.params.id, function(err, foundCampground){
+    if (!foundCampground) {
+      return res.status(400).send("Item not found.")
+    }
     res.render("campgrounds/edit", {campground: foundCampground});
   });
 });
@@ -89,7 +96,13 @@ router.delete("/:id", middleware.checkCampgroundOwnership, function(req, res){
     if(err){
       res.redirect("/campgrounds");
     } else {
-      res.redirect("/campgrounds");
+      Comment.deleteMany( {_id: {$in: campgroundRemoved.comments } }, (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.redirect("/campgrounds");
+        }
+      });
     }
   });
 });
